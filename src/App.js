@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
+import Counter from './components/Counter';
+import ClassCounter from './components/ClassCounter';
+import './styles/App.css';
+import PostItem from './components/PostItem';
 
 function App() {
-	const [likes, setLikes] = useState(0);
-	const [value, setValue] = useState('Текст в инпуте');
-
-	function increment() {
-		setLikes(likes + 1);
-	}
-
-	function decrement() {
-		setLikes(likes - 1);
-	}
-
+	const [posts, setposts] = useState([
+		{ id: 1, title: 'JavaScript', body: 'Description' },
+		{ id: 2, title: 'JavaScript 2', body: 'Description' },
+		{ id: 3, title: 'JavaScript 3', body: 'Description' },
+	]);
 	return (
 		<div className="App">
-			<h1>{likes}</h1>
-			<h1>{value}</h1>
-			<input type="text" value={value} onChange={(event) => setValue(event.target.value)}></input>
-
-			<button onClick={increment}>Incremetn</button>
-			<button onClick={decrement}>Decrement</button>
+			<h1 style={{ textAlign: 'center' }}>Список постов</h1>
+			{posts.map((post) => (
+				<PostItem post={post} key={post.id} />
+			))}
 		</div>
 	);
 }
