@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import './styles/App.css';
 import PostList from './components/PostList';
 import PostForm from './components/PostForm';
+import MySelect from './components/UI/select/MySelect';
 
 function App() {
 	const [posts, setPosts] = useState([{ id: 1, title: 'JavaScript', body: 'Description' }]);
@@ -18,7 +19,24 @@ function App() {
 	return (
 		<div className="App">
 			<PostForm create={createPost} />
-			<PostList remove={removePost} posts={posts} title="Список постов 1" />
+
+			<hr style={{ margin: '15px 0' }} />
+
+			<div>
+				<MySelect
+					defaultValue="Сортировка"
+					options={[
+						{ value: 'title', name: 'По названию' },
+						{ value: 'body', name: 'По Описанию' },
+					]}
+				/>
+			</div>
+
+			{posts.length ? (
+				<PostList remove={removePost} posts={posts} title="Список постов" />
+			) : (
+				<h1 style={{ textAlign: 'center' }}>Посты не найдены!</h1>
+			)}
 		</div>
 	);
 }
